@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
 
     [Header("Flame Casting Settings")]
-    public Transform flamePosition;
-    public GameObject flameprojectile;
+    [SerializeField] private Transform fireCastPoint;
+    [SerializeField] private GameObject flameProjectile;
 
     private void Awake()
     {
@@ -71,10 +71,14 @@ public class PlayerController : MonoBehaviour
     {
         if ((xInput < 0 && facingRight) || (xInput > 0 && !facingRight))
         {
-            facingRight = !facingRight;
-            transform.Rotate(0f, 180f, 0f);
+            facingRight = !facingRight; 
+            
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
         }
     }
+
     #endregion
 
     #region Jump Logic
@@ -139,9 +143,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(flameprojectile, flamePosition.position, flamePosition.rotation);
+            Vector2 shootDirection = facingRight ? Vector2.right : Vector2.left;
+
+            GameObject flame = Instantiate(flameProjectile, fireCastPoint.position, Quaternion.identity);
+
+            flame.GetComponent<FlameResource>().Initialize(shootDirection);
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

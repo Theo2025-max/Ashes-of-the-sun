@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2443403647500501547}
   - component: {fileID: 2294115251793005116}
   - component: {fileID: 6076533907712509919}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VFX_Critical_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4913,7 +4913,7 @@ GameObject:
   - component: {fileID: 7483269936816963507}
   - component: {fileID: 7832433605726024057}
   - component: {fileID: 7242396966515227311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9804,7 +9804,7 @@ GameObject:
   - component: {fileID: 7943938094035142524}
   - component: {fileID: 8136039662040346796}
   - component: {fileID: 6057159712247161904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
