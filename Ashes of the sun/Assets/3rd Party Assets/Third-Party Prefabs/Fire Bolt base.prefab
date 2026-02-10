@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8987524148835860375}
   - component: {fileID: 7596922052670056329}
   - component: {fileID: 6766307358979329142}
-  - component: {fileID: 3396325648082259238}
   m_Layer: 7
   m_Name: Fire Bolt base
   m_TagString: Untagged
@@ -186,17 +185,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3396325648082259238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341111361158076419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51d4016bf169f0041850a4e1f4cc8327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flameProjectileSpeed: 10
-  impactEffect: {fileID: 2970218072634390708, guid: 6b9d4c892dc8c7d4091a166f297e990b, type: 3}

@@ -26,9 +26,6 @@ public class PlayerController : MonoBehaviour
     private float xInput;
     private bool facingRight = true;
 
-    [Header("Flame Casting Settings")]
-    [SerializeField] private Transform fireCastPoint;
-    [SerializeField] private GameObject flameProjectile;
 
     private void Awake()
     {
@@ -40,7 +37,7 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         HandleGroundCheck();
         AttemptBufferJump();
-        ShootFlame();
+       
     }
 
 
@@ -137,17 +134,6 @@ public class PlayerController : MonoBehaviour
         {
             canDoubleJump = true;
             ActivateCoyoteJump();
-        }
-    }
-    private void ShootFlame()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 shootDirection = facingRight ? Vector2.right : Vector2.left;
-
-            GameObject flame = Instantiate(flameProjectile, fireCastPoint.position, Quaternion.identity);
-
-            flame.GetComponent<FlameResource>().Initialize(shootDirection);
         }
     }
 
