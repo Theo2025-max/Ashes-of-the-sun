@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     private float xInput;
     private bool facingRight = true;
 
+    [Header("Flame Casting Settings")]
+    public Transform flamePosition;
+    public GameObject flameprojectile;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,7 +40,9 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         HandleGroundCheck();
         AttemptBufferJump();
+        ShootFlame();
     }
+
 
     private void FixedUpdate()
     {
@@ -129,7 +135,13 @@ public class PlayerController : MonoBehaviour
             ActivateCoyoteJump();
         }
     }
-
+    private void ShootFlame()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(flameprojectile, flamePosition.position, flamePosition.rotation);
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
