@@ -121,12 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGroundCheck()
     {
-        isGrounded = Physics2D.Raycast(
-            transform.position,
-            Vector2.down,
-            groundCheckDistance,
-            whatIsGround
-        );
+        isGrounded = Physics2D.Raycast(transform.position,Vector2.down,groundCheckDistance,whatIsGround);
 
         if (isGrounded)
         {
@@ -138,9 +133,6 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(
-            transform.position,
-            new Vector2(transform.position.x, transform.position.y - groundCheckDistance)
-        );
+        Gizmos.DrawLine(transform.position,new Vector2(transform.position.x, transform.position.y - groundCheckDistance));
     }
 }
