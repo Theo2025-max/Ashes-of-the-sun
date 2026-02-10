@@ -1,5 +1,13 @@
 fileFormatVersion: 2
 guid: 54bb8888e3f07e14fbd31e43d3209b2b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 323597
+  packageName: RPG Essentials-Pixel Fire Demo 2D VFX (Free)
+  packageVersion: 1.0
+  assetPath: Assets/Pegasus Studios/RPG Essentials-Pixel Fire Demo 2D VFX (Free)/Resources/Fire
+    Bolts/Fire bolt base/Fire bolt base5.png
+  uploadId: 769219
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -206,11 +214,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 323597
-  packageName: RPG Essentials-Pixel Fire Demo 2D VFX (Free)
-  packageVersion: 1.0
-  assetPath: Assets/Pegasus Studios/RPG Essentials-Pixel Fire Demo 2D VFX (Free)/Resources/Fire
-    Bolts/Fire bolt base/Fire bolt base5.png
-  uploadId: 769219
