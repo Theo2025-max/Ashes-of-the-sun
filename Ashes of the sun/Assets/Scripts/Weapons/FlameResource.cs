@@ -2,23 +2,16 @@ using UnityEngine;
 
 public class FlameResource : MonoBehaviour
 {
-    public int flameSpeed;
-    Rigidbody2D rb;
-    GameObject player;
+    public float flameSpeed = 10f;
+    private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindWithTag("Player");
-
-        if (player.transform.localEulerAngles.y == 180)
-        {
-            flameSpeed = flameSpeed * -1;
-        }
     }
 
-    private void Update()
+    public void SetDirection(float direction)
     {
-        rb.linearVelocity = new Vector2 (flameSpeed, 0);
+        rb.linearVelocity = new Vector2(direction * flameSpeed, 0f);
     }
 }

@@ -140,9 +140,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(flameProjectile, flamePosition.position, flamePosition.rotation);
+            GameObject flame = Instantiate(flameProjectile,flamePosition.position,Quaternion.identity);
+            float direction = facingRight ? 1f : -1f;
+            flame.GetComponent<FlameResource>().SetDirection(direction);
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
