@@ -1262,7 +1262,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1594357553}
-  - {fileID: 1436739497}
   m_Father: {fileID: 1994055416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1436739496
@@ -1289,12 +1288,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436739496}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.457, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45700002, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1416122842}
+  m_Father: {fileID: 1994055416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1586850734
 GameObject:
@@ -1790,6 +1789,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1416122842}
+  - {fileID: 1436739497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1994055417
@@ -1813,7 +1813,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  flameProjectile: {fileID: 341111361158076419, guid: 5249596afa711eb40a53be58b38d290a, type: 3}
+  flameProjectile: {fileID: 2994110495026577415, guid: a17d25a2dab9464488d96fab0afa1e9a, type: 3}
   flamePosition: {fileID: 1436739497}
 --- !u!50 &1994055418
 Rigidbody2D:

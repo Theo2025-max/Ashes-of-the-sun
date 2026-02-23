@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public GameObject flameProjectile;
     public Transform flamePosition;
 
+    public bool IsFacingRight => facingRight;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
