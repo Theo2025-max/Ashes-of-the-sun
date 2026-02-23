@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator anim;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
@@ -30,19 +31,25 @@ public class PlayerController : MonoBehaviour
     public GameObject flameProjectile;
     public Transform flamePosition;
 
-    public bool IsFacingRight => facingRight;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim =GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
+        HandleAnimations();
         HandleInput();
         HandleGroundCheck();
         AttemptBufferJump();
         ShootFlame();
 
+    }
+
+    private void HandleAnimations()
+    {
+        anim.SetFloat("xVelocity", rb.linearVelocity.x);
     }
 
     private void FixedUpdate()
