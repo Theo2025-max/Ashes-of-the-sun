@@ -19,8 +19,8 @@ public class Enemy_Ghost : Enemy
     private float idleTimer;
 
     [Header("Ghost Death")]
-    [SerializeField] private float fallSpeed = 2f;     
-    [SerializeField] private float fadeDuration = 1f;  
+    [SerializeField] private float fallSpeed = 2f;
+    [SerializeField] private float fadeDuration = 1f;
 
     protected override void Update()
     {
@@ -31,7 +31,6 @@ public class Enemy_Ghost : Enemy
         activeTimer -= Time.deltaTime;
         idleTimer -= Time.deltaTime;
 
-        // Reordered operands for performance
         if (idleTimer <= 0f && !isChasing)
             StartChase();
         else if (isChasing && activeTimer <= 0f)
@@ -45,7 +44,7 @@ public class Enemy_Ghost : Enemy
         if (target == null || !isChasing || !canMove) return;
 
         HandleFlip(target.position.x);
-        transform.position = Vector2.MoveTowards(transform.position,target.position,moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
 
     private void StartChase()
@@ -108,7 +107,7 @@ public class Enemy_Ghost : Enemy
             yield return null;
         }
 
-        while (transform.position.y > -10f) 
+        while (transform.position.y > -10f)
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
             yield return null;
@@ -117,6 +116,33 @@ public class Enemy_Ghost : Enemy
         Destroy(gameObject);
     }
 
-    private void MakeInvisible() => sr.color = Color.clear;
-    private void MakeVisible() => sr.color = Color.white;
+    // ===========================
+    // VISIBLE / INVISIBLE METHODS FOR ANIMATION EVENTS
+    // ===========================
+    public void MakeInvisible() => sr.color = Color.clear;
+    public void MakeVisible() => sr.color = Color.white;
+
+    // ===========================
+    // PLAYER DAMAGE COLLISION (currently optional / can be disabled)
+    // ===========================
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Uncomment this later if you want ghost to damage the player
+        //TryDamagePlayer(collision.collider);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Uncomment this later if you want ghost to damage the player
+        //TryDamagePlayer(collision);
+    }
+
+    private void TryDamagePlayer(Component collider)
+    {
+        PlayerHealth player = collider.GetComponentInParent<PlayerHealth>();
+        if (player != null)
+        {
+            player.TakeDamage(DamageAmount);
+        }
+    }
 }

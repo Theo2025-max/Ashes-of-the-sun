@@ -27,7 +27,12 @@ public class Enemy : MonoBehaviour
     // HEALTH
     [Header("Health")]
     [SerializeField] protected int maxHealth = 20;
-    protected int currentHealth =2;
+    protected int currentHealth = 2;
+
+    // DAMAGE (we keep this in case we add it back later)
+    [Header("Damage")]
+    [SerializeField] private int damageAmount = 1;
+    public int DamageAmount => damageAmount;
 
     // DEATH
     [Header("Death")]
@@ -49,23 +54,20 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
         if (isDead)
-        HandleDeathRotation();
+            HandleDeathRotation();
 
         HandleCollision();
         HandleAnimator();
     }
 
-    protected virtual void HandleAnimator()
-    {
-       // anim.SetFloat("xVelocity", rb.linearVelocity.x);
-    }
+    protected virtual void HandleAnimator() { }
 
     protected virtual void HandleCollision()
     {
         if (groundCheck)
-        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+            isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
-        isWallDetected = Physics2D.Raycast( transform.position, Vector2.right * facingDir,wallCheckDistance, whatIsGround);
+        isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
     }
 
     protected virtual void HandleFlip(float targetX)
@@ -82,23 +84,19 @@ public class Enemy : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    // ======================
-    // DAMAGE & HEALTH
-    // ======================
+    // DAMAGE & HEALTH (still needed for enemy's own damage system)
     public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 
         currentHealth -= damage;
-        anim.SetTrigger("hit");
+        if (anim) anim.SetTrigger("hit");
 
         if (currentHealth <= 0)
             Die();
     }
 
-    // ======================
     // DEATH LOGIC
-    // ======================
     public virtual void Die()
     {
         if (isDead) return;
@@ -123,14 +121,14 @@ public class Enemy : MonoBehaviour
 
     private void HandleDeathRotation()
     {
-        transform.Rotate(0,0, deathRotationSpeed * deathRotationDirection * Time.deltaTime);
+        transform.Rotate(0, 0, deathRotationSpeed * deathRotationDirection * Time.deltaTime);
     }
 
     protected virtual void OnDrawGizmos()
     {
         if (groundCheck)
-            Gizmos.DrawLine(groundCheck.position,groundCheck.position + Vector3.down * groundCheckDistance);
+            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckDistance);
 
-        Gizmos.DrawLine(transform.position,transform.position + Vector3.right * facingDir * wallCheckDistance);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * facingDir * wallCheckDistance);
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static event System.Action OnFlameShot; // Event fired whenever player shoots
+
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim =GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -44,7 +46,6 @@ public class PlayerController : MonoBehaviour
         HandleGroundCheck();
         AttemptBufferJump();
         ShootFlame();
-
     }
 
     private void HandleAnimations()
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGroundCheck()
     {
-        isGrounded = Physics2D.Raycast(transform.position,Vector2.down,groundCheckDistance,whatIsGround);
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
 
         if (isGrounded)
         {
@@ -148,15 +149,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject flame = Instantiate(flameProjectile,flamePosition.position,Quaternion.identity);
+            // Spawn flame
+            GameObject flame = Instantiate(flameProjectile, flamePosition.position, Quaternion.identity);
             float direction = facingRight ? 1f : -1f;
             flame.GetComponent<FlameResource>().SetDirection(direction);
+
+            // Reduce player health
+            OnFlameShot?.Invoke();
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position,new Vector2(transform.position.x, transform.position.y - groundCheckDistance));
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckDistance));
     }
 }
