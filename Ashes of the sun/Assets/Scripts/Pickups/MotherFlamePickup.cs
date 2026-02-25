@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class MotherFlamePickup : MonoBehaviour
 {
-    [Header("Health Restore")]
-    [SerializeField] private int restoreAmount = 1;
+    //[Header("Health Restore")]
+    //[SerializeField] private int restoreAmount = 1;
 
     private void Awake()
     {

@@ -10,33 +10,38 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image[] motherFlames;
 
+    private PlayerController playerController;
+
     private void Awake()
     {
         currentHealth = startingHealth;
         UpdateMotherFlamesUI();
+
+        playerController = GetComponent<PlayerController>();
     }
 
     private void OnEnable()
     {
-        // Subscribe to shooting event
-        PlayerController.OnFlameShot += OnPlayerShoot;
+        if (playerController != null)
+            playerController.OnFlameShot += OnPlayerShoot;
     }
 
     private void OnDisable()
     {
-        PlayerController.OnFlameShot -= OnPlayerShoot;
+        if (playerController != null)
+            playerController.OnFlameShot -= OnPlayerShoot;
     }
 
-    // Called when the player shoots
     private void OnPlayerShoot()
     {
-        TakeDamage(1); // Shooting costs 1 health
+        TakeDamage(1);
     }
 
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        currentHealth = Mathf.Max(currentHealth, 0); // prevent negative health
+        currentHealth = Mathf.Max(currentHealth, 0);
+
         UpdateMotherFlamesUI();
 
         if (currentHealth <= 0)
