@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float knockbackDuration = 1f;
     [SerializeField] private Vector2 knockbackPower;
     private bool isKnocked;
-    private bool canBeKnocked;
+    private bool canBeKnocked =true;
 
 
 
@@ -95,10 +95,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-            knockback();
-        
-        
         // Handle input
         moveInput.x = Input.GetAxisRaw("Horizontal");
 
@@ -108,11 +104,13 @@ public class PlayerController : MonoBehaviour
             RequestBufferJump();
         }
 
-        // Flame shooting
-        ShootFlame();
-
+      
         // Movement & physics
         UpdateAirborneStatus();
+
+        if(isKnocked) return;
+
+        ShootFlame();
         HandleWallSlide();
         HandleMovement();
         HandleFlip();
@@ -123,10 +121,12 @@ public class PlayerController : MonoBehaviour
 
     public void knockback()
     {
-        isKnocked = true;
-        anim.SetTrigger("knockback");
-    }
+        if (!canBeKnocked) return;
 
+        StartCoroutine(knockbackRoutine());
+        anim.SetTrigger("knockback");
+        rb.linearVelocity = new Vector2(knockbackPower.x * -facingDir, knockbackPower.y);
+    }
     #endregion
 
     #region Movement Logic
@@ -257,6 +257,18 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Collision & Animation
+
+
+    private IEnumerator knockbackRoutine()
+    {
+        canBeKnocked = false;
+        isKnocked = true;
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        canBeKnocked = true;
+        isKnocked = false;
+    }
 
     private void HandleCollision()
     {
