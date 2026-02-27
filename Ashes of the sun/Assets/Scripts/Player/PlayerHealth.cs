@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField, Range(1, 10)] private int startingHealth = 5;
     private int currentHealth;
 
+    private int maxHealth; // NEW
+
     [Header("UI")]
     [SerializeField] private Image[] motherFlames;
 
@@ -14,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        maxHealth = startingHealth; // NEW
         currentHealth = startingHealth;
         UpdateMotherFlamesUI();
 
@@ -46,6 +49,21 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
+    }
+
+    //NEW METHOD
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+
+        UpdateMotherFlamesUI();
+    }
+
+    //NEW METHOD
+    public bool CanHeal()
+    {
+        return currentHealth < maxHealth;
     }
 
     private void UpdateMotherFlamesUI()
