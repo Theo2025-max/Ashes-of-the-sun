@@ -17,7 +17,7 @@ TagManager:
   - Projectile
   - FlyingEnemy
   - Enemy
-  - 
+  - Background
   - 
   - 
   - 
@@ -40,11 +40,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 3777001015
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Stage
     uniqueID: 199486429
