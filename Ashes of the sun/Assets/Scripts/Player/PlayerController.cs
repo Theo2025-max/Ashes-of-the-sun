@@ -74,13 +74,16 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region Flame Casting
+    #region Flame Casting & VFX
 
     [Header("Flame Casting Settings")]
     public GameObject flameProjectile;
     public Transform flamePosition;
 
     public event Action OnFlameShot;
+
+    [Header("VFX")]
+    public GameObject deathVFX;
 
     #endregion
 
@@ -270,7 +273,13 @@ public class PlayerController : MonoBehaviour
         isKnocked = false;
     }
 
-    public void Die() => Destroy(gameObject);
+    public void Die()
+    {
+        GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
+    }
+
 
     private void HandleCollision()
     {

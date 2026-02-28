@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1862997888203509401}
   - component: {fileID: 1200088160913196448}
   - component: {fileID: 4530988750640256896}
-  - component: {fileID: 8765828771579513850}
+  - component: {fileID: 412208194327974664}
   m_Layer: 0
   m_Name: MotherFlame VFX
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8765828771579513850
+--- !u!114 &412208194327974664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +120,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6648551206029953495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db169a7668e2e34b8a109410fcec1ab, type: 3}
+  m_Script: {fileID: 11500000, guid: ad6c0d8b3b1043640b0d42f40f639180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
