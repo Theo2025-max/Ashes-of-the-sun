@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using FirstGearGames.SmoothCameraShaker;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -88,6 +89,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("VFX")]
     public GameObject deathVFX;
+
+    //CAMERA SHAKE AREA
+    public ShakeData shoot_shake;
 
     #endregion
 
@@ -352,6 +356,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject flame = Instantiate(flameProjectile, flamePosition.position, Quaternion.identity);
+            CameraShakerHandler.Shake(shoot_shake);
 
             float direction = facingRight ? 1f : -1f;
 
