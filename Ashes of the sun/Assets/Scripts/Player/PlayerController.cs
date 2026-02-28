@@ -270,6 +270,8 @@ public class PlayerController : MonoBehaviour
         isKnocked = false;
     }
 
+    public void Die() => Destroy(gameObject);
+
     private void HandleCollision()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
