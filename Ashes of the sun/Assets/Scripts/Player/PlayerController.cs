@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
         else if (isWallDetected && !isGrounded)
         {
             WallJump();
+            Jump();
         }
         else if (canDoubleJump)
         {
