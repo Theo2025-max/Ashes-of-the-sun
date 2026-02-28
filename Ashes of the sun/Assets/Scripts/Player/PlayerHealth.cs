@@ -6,8 +6,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     [SerializeField, Range(1, 10)] private int startingHealth = 5;
     private int currentHealth;
-
-    private int maxHealth; // NEW
+    private int maxHealth;
 
     [Header("VFX")]
     public GameObject deathVFX;
@@ -19,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        maxHealth = startingHealth; // NEW
+        maxHealth = startingHealth;
         currentHealth = startingHealth;
         UpdateMotherFlamesUI();
 
@@ -54,7 +53,6 @@ public class PlayerHealth : MonoBehaviour
             Die();
     }
 
-    //NEW METHOD
     public void Heal(int amount)
     {
         currentHealth += amount;
@@ -63,7 +61,6 @@ public class PlayerHealth : MonoBehaviour
         UpdateMotherFlamesUI();
     }
 
-    //NEW METHOD
     public bool CanHeal()
     {
         return currentHealth < maxHealth;
@@ -77,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
+        Instantiate(deathVFX, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

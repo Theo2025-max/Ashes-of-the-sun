@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy_Ghost : Enemy
 {
+    #region Ghost Behavior
     [Header("Ghost Behavior")]
     [SerializeField] private float activeDuration = 3f;
     private float activeTimer;
@@ -13,19 +14,26 @@ public class Enemy_Ghost : Enemy
 
     private bool isChasing;
     private Transform target;
+    #endregion
 
+    #region Idle Timing
     [Header("Idle Timing")]
     [SerializeField] private float idleDuration = 1.5f;
     private float idleTimer;
+    #endregion
 
+    #region Ghost Death
     [Header("Ghost Death")]
     [SerializeField] private float fallSpeed = 2f;
     [SerializeField] private float fadeDuration = 1f;
+    #endregion
 
-    //NEW: Mother Flame Prefab
+    #region Drops
     [Header("Drops")]
     [SerializeField] private GameObject motherFlamePrefab;
+    #endregion
 
+    #region Unity Callbacks
     protected override void Update()
     {
         base.Update();
@@ -42,7 +50,9 @@ public class Enemy_Ghost : Enemy
 
         HandleMovement();
     }
+    #endregion
 
+    #region Movement
     private void HandleMovement()
     {
         if (target == null || !isChasing || !canMove) return;
@@ -50,7 +60,9 @@ public class Enemy_Ghost : Enemy
         HandleFlip(target.position.x);
         transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
+    #endregion
 
+    #region Chase Logic
     private void StartChase()
     {
         var players = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
@@ -74,10 +86,9 @@ public class Enemy_Ghost : Enemy
         isChasing = false;
         anim.SetTrigger("disappear");
     }
+    #endregion
 
-    // ===========================
-    // OVERRIDE DEATH
-    // ===========================
+    #region Death
     public override void Die()
     {
         if (isDead) return;
@@ -88,13 +99,12 @@ public class Enemy_Ghost : Enemy
         EnableColliders(false);
         anim.SetTrigger("disappear");
 
-        //Spawn Mother Flame immediately at death position
+        // Spawn Mother Flame immediately at death position
         SpawnMotherFlame();
 
         StartCoroutine(GhostFallDeath());
     }
 
-    //NEW METHOD
     private void SpawnMotherFlame()
     {
         if (motherFlamePrefab == null)
@@ -103,9 +113,6 @@ public class Enemy_Ghost : Enemy
         Instantiate(motherFlamePrefab, transform.position, Quaternion.identity);
     }
 
-    // ===========================
-    // FALL + FADE DEATH COROUTINE
-    // ===========================
     private IEnumerator GhostFallDeath()
     {
         float elapsed = 0f;
@@ -130,7 +137,10 @@ public class Enemy_Ghost : Enemy
 
         Destroy(gameObject);
     }
+    #endregion
 
+    #region Visibility Helpers
     public void MakeInvisible() => sr.color = Color.clear;
     public void MakeVisible() => sr.color = Color.white;
+    #endregion
 }

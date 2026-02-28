@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,11 +17,14 @@ public class PlayerController : MonoBehaviour
 
     #region Movement Settings
 
+    private bool canBeControlled = false;
+    
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float doubleJumpForce;
 
+    private float defaultGravityScale;
     private bool canDoubleJump;
 
     #endregion
@@ -96,6 +100,12 @@ public class PlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+    private void Start()
+    {
+        defaultGravityScale =rb.gravityScale;
+        RespawnFinished(false);
+    }
+
     private void Update()
     {
         // Handle input
@@ -111,6 +121,7 @@ public class PlayerController : MonoBehaviour
         // Movement & physics
         UpdateAirborneStatus();
 
+        if(canBeControlled == false) return;
         if(isKnocked) return;
 
         ShootFlame();
@@ -121,7 +132,23 @@ public class PlayerController : MonoBehaviour
         HandleAnimations();
     }
 
-
+    public void RespawnFinished(bool finished)
+    {
+        float gravityScale = defaultGravityScale;
+        
+        if (finished)
+        {
+            rb.gravityScale = gravityScale;
+            canBeControlled = true;
+            cd.enabled = true;
+        }
+        else
+        {
+            rb.gravityScale = 0;
+            canBeControlled = false;
+            cd.enabled = false;
+        }
+    }
     public void knockback()
     {
         if (!canBeKnocked) return;
