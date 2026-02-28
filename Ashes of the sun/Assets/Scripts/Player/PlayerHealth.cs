@@ -5,24 +5,35 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField, Range(1, 10)] private int startingHealth = 5;
+
     private int currentHealth;
     private int maxHealth;
 
     [Header("VFX")]
-    public GameObject deathVFX;
+    [SerializeField] private GameObject deathVFX;
 
-    [Header("UI")]
-    [SerializeField] private Image[] motherFlames;
-
+    private Image[] motherFlames;
     private PlayerController playerController;
 
     private void Awake()
     {
         maxHealth = startingHealth;
         currentHealth = startingHealth;
-        UpdateMotherFlamesUI();
 
         playerController = GetComponent<PlayerController>();
+    }
+
+    //CALLED BY GAME MANAGER
+    public void BindHUD(PlayerHUD hud)
+    {
+        if (hud == null)
+        {
+            Debug.LogError("PlayerHUD is NULL");
+            return;
+        }
+
+        motherFlames = hud.motherFlames;
+        UpdateMotherFlamesUI();
     }
 
     private void OnEnable()
@@ -42,9 +53,9 @@ public class PlayerHealth : MonoBehaviour
         TakeDamage(1);
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(int amount)
     {
-        currentHealth -= damageAmount;
+        currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
 
         UpdateMotherFlamesUI();
@@ -68,13 +79,22 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateMotherFlamesUI()
     {
+        if (motherFlames == null) return;
+
         for (int i = 0; i < motherFlames.Length; i++)
+        {
+            if (motherFlames[i] == null) continue;
             motherFlames[i].gameObject.SetActive(i < currentHealth);
+        }
     }
 
     private void Die()
     {
-        Instantiate(deathVFX, transform.position, Quaternion.identity);
+        if (deathVFX != null)
+            Instantiate(deathVFX, transform.position, Quaternion.identity);
+
         gameObject.SetActive(false);
+
+        GameManager.instance.RespawnPlayer();
     }
 }
