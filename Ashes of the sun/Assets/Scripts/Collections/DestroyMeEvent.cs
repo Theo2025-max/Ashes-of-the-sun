@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class MotherFlameVFX : MonoBehaviour
-{   
+public class DestroyMeEvent : MonoBehaviour
+{
     public void DestroyMe() => Destroy(gameObject);
 
 }

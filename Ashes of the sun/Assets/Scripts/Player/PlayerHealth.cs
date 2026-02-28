@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
 
     private int maxHealth; // NEW
 
+    [Header("VFX")]
+    public GameObject deathVFX;
+
     [Header("UI")]
     [SerializeField] private Image[] motherFlames;
 
@@ -74,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!");
+        GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }
