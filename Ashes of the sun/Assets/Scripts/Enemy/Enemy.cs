@@ -131,4 +131,6 @@ public class Enemy : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * facingDir * wallCheckDistance);
     }
+
+
 }

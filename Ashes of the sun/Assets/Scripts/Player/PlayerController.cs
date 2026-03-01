@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
     //CAMERA SHAKE AREA
     public ShakeData shoot_shake;
 
+    
+
     #endregion
 
     #region Unity Lifecycle
@@ -164,6 +166,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(knockbackRoutine());
         anim.SetTrigger("knockback");
         rb.linearVelocity = new Vector2(knockbackPower.x * knockbackDir, knockbackPower.y);
+    }
+
+    public void force_reset_knockback()
+    {
+        canBeKnocked = true;
+        isKnocked = false;
     }
     #endregion
 
@@ -312,7 +320,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
     }
 

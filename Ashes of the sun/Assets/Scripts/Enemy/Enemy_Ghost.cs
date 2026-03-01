@@ -8,9 +8,9 @@ public class Enemy_Ghost : Enemy
     [SerializeField] private float activeDuration = 3f;
     private float activeTimer;
 
-    [SerializeField] private float xMinDistance = 2f;
-    [SerializeField] private float yMinDistance = 1f;
-    [SerializeField] private float yMaxDistance = 3f;
+    [SerializeField] public float xMinDistance = 6f;
+    [SerializeField] public float yMinDistance = 4f;
+    [SerializeField] public float yMaxDistance = 8f;
 
     private bool isChasing;
     private Transform target;
@@ -34,6 +34,10 @@ public class Enemy_Ghost : Enemy
     #endregion
 
     #region Unity Callbacks
+
+    //ROYS STUFF
+    private bool can_damage = true;
+    private float damage_time = 0;
     protected override void Update()
     {
         base.Update();
@@ -47,6 +51,32 @@ public class Enemy_Ghost : Enemy
             StartChase();
         else if (isChasing && activeTimer <= 0f)
             EndChase();
+
+        if(Vector2.Distance(target.position, transform.position) < 1.5f)
+        {
+            PlayerController playerController = target.GetComponent<PlayerController>();
+            PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
+            if (playerController != null)
+            {
+                playerController.knockback(transform.position.x);
+            }
+            if (playerHealth != null && can_damage)
+            {
+                playerHealth.TakeDamage(1);
+                can_damage = false;
+               // objectsBeingDamaged.Add(collision.gameObject);
+            }
+        }
+
+        if (can_damage == false) 
+        {
+            damage_time += Time.deltaTime;
+            if(damage_time > 1)
+            {
+                can_damage = true;
+                damage_time = 0;
+            }
+        }
 
         HandleMovement();
     }

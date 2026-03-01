@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //ROY TRYING STUFF
+    public GameObject player;
+    public PlayerHealth health;
+    public PlayerController controller;
     #region Singleton
     public static GameManager instance;
 
@@ -33,18 +37,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RespawnCoroutine()
     {
+        player.SetActive(false);
         if (cameraManager != null)
             yield return StartCoroutine(cameraManager.LeadCameraToRespawn(respawnPoint.position));
 
         yield return new WaitForSeconds(respawnDelay);
 
-        GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
-        playerController = newPlayer.GetComponent<PlayerController>();
+        //GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
+        playerController = player.GetComponent<PlayerController>();
 
         if (cameraManager != null)
-            cameraManager.FollowPlayerWithoutSnap(newPlayer.transform);
+            cameraManager.FollowPlayerWithoutSnap(player.transform);
 
-        PlayerEvents.PlayerSpawned(newPlayer.transform);
+        PlayerEvents.PlayerSpawned(player.transform);
+        player.transform.position = respawnPoint.position;
+        health.reset_health();
+        player.SetActive(true);
+        controller.force_reset_knockback();
     }
     #endregion
 }

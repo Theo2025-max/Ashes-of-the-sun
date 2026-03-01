@@ -25,6 +25,9 @@ public class PlayerHealth : MonoBehaviour
     #endregion
 
     #region Unity Callbacks
+
+    //ROY STUFF
+    public GameManager game_manager;
     private void Awake()
     {
         maxHealth = startingHealth;
@@ -55,13 +58,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
-        currentHealth = Mathf.Max(currentHealth, 0);
+        if(currentHealth > 0)
+        {
+            currentHealth -= damageAmount;
+            currentHealth = Mathf.Max(currentHealth, 0);
 
-        UpdateMotherFlamesUI();
+            UpdateMotherFlamesUI();
 
-        if (currentHealth <= 0)
-            Die();
+            if (currentHealth <= 0)
+                Die();
+        }
+
     }
 
     public void Heal(int amount)
@@ -69,6 +76,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
 
+        UpdateMotherFlamesUI();
+    }
+
+    public void reset_health()
+    {
+        maxHealth = startingHealth;
+        currentHealth = startingHealth;
         UpdateMotherFlamesUI();
     }
 
@@ -91,6 +105,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Instantiate(deathVFX, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
+        game_manager.RespawnPlayer();
     }
     #endregion
 }
