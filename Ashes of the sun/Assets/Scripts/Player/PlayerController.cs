@@ -153,13 +153,17 @@ public class PlayerController : MonoBehaviour
             cd.enabled = false;
         }
     }
-    public void knockback()
+    public void knockback(float sourceDamageXPosition)
     {
+        float knockbackDir = 1;
+        if (transform.position.x < sourceDamageXPosition)
+            knockbackDir = -1;
+
         if (!canBeKnocked) return;
 
         StartCoroutine(knockbackRoutine());
         anim.SetTrigger("knockback");
-        rb.linearVelocity = new Vector2(knockbackPower.x * -facingDir, knockbackPower.y);
+        rb.linearVelocity = new Vector2(knockbackPower.x * knockbackDir, knockbackPower.y);
     }
     #endregion
 
