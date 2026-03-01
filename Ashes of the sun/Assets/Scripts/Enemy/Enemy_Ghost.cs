@@ -38,6 +38,21 @@ public class Enemy_Ghost : Enemy
     //ROYS STUFF
     private bool can_damage = true;
     private float damage_time = 0;
+    bool targeting_player;
+
+
+    private void Start()
+    {
+        int target_int = Random.Range(0, 2);
+        if (target_int == 0) 
+        {
+            targeting_player = true;
+        }
+        else
+        {
+            targeting_player = false;
+        }
+    }
     protected override void Update()
     {
         base.Update();
@@ -52,20 +67,33 @@ public class Enemy_Ghost : Enemy
         else if (isChasing && activeTimer <= 0f)
             EndChase();
 
-        if(Vector2.Distance(target.position, transform.position) < 1.5f)
+        if(Vector2.Distance(target.position, transform.position) < 1.5f )
         {
-            PlayerController playerController = target.GetComponent<PlayerController>();
-            PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
-            if (playerController != null)
+            if (targeting_player)
             {
-                playerController.knockback(transform.position.x);
+                PlayerController playerController = target.GetComponent<PlayerController>();
+                PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
+                if (playerController != null)
+                {
+                    playerController.knockback(transform.position.x);
+                }
+                if (playerHealth != null && can_damage)
+                {
+                    //playerHealth.TakeDamage(1);
+                    can_damage = false;
+                    // objectsBeingDamaged.Add(collision.gameObject);
+                }
             }
-            if (playerHealth != null && can_damage)
+            else
             {
-                playerHealth.TakeDamage(1);
-                can_damage = false;
-               // objectsBeingDamaged.Add(collision.gameObject);
+                Pandorasbox pandorasbox = target.GetComponent<Pandorasbox>();
+                if (pandorasbox != null) 
+                {
+                    pandorasbox.take_damage(10);
+                    Destroy(gameObject);
+                }
             }
+
         }
 
         if (can_damage == false) 
@@ -95,19 +123,35 @@ public class Enemy_Ghost : Enemy
     #region Chase Logic
     private void StartChase()
     {
-        var players = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
-        if (players.Length == 0) return;
+        if (targeting_player)
+        {
+            var players = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+            if (players.Length == 0) return;
 
-        target = players[Random.Range(0, players.Length)].transform;
+            target = players[Random.Range(0, players.Length)].transform;
 
-        float xOffset = Random.value < 0.5f ? -1 : 1;
-        float yOffset = Random.Range(yMinDistance, yMaxDistance);
+            float xOffset = Random.value < 0.5f ? -1 : 1;
+            float yOffset = Random.Range(yMinDistance, yMaxDistance);
 
-        transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
+            transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
 
-        activeTimer = activeDuration;
-        isChasing = true;
-        anim.SetTrigger("appear");
+            activeTimer = activeDuration;
+            isChasing = true;
+            anim.SetTrigger("appear");
+        }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag("PANDORAS BOX").transform;
+            float xOffset = Random.value < 0.5f ? -1 : 1;
+            float yOffset = Random.Range(yMinDistance, yMaxDistance);
+
+            transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
+
+            activeTimer = activeDuration;
+            isChasing = true;
+            anim.SetTrigger("appear");
+        }
+        
     }
 
     private void EndChase()

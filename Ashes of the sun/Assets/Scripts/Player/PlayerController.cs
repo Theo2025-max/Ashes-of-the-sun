@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
     //CAMERA SHAKE AREA
     public ShakeData shoot_shake;
+    public ShakeData damage_shake;
 
     
 
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour
     }
     public void knockback(float sourceDamageXPosition)
     {
+        CameraShakerHandler.Shake(damage_shake);
         float knockbackDir = 1;
         if (transform.position.x < sourceDamageXPosition)
             knockbackDir = -1;
