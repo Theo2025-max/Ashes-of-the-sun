@@ -9,7 +9,7 @@ public class Ghost_spawner : MonoBehaviour
     public GameObject Ghost_enemy;
     float time_passed = 0;
     public Transform[] spawn_positions;
-    private float wait_time = 6;
+    private float wait_time = 10;
     public Transform Player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,11 +23,11 @@ public class Ghost_spawner : MonoBehaviour
         time_passed += Time.deltaTime;
         if (time_passed > 120)
         {
-            wait_time = 2;
+            wait_time = 5;
         }
         else if(time_passed > 60)
         {
-            wait_time = 4;
+            wait_time = 7;
         }
     }
 
@@ -58,9 +58,9 @@ public class Ghost_spawner : MonoBehaviour
                 if(e_g != null)
                 {
                     print("updated ghst positioning to hard");
-                    e_g.xMinDistance = 2;
-                    e_g.yMinDistance = 1;
-                    e_g.yMaxDistance = 4;
+                    e_g.xMinDistance = 4;
+                    e_g.yMinDistance = 2;
+                    e_g.yMaxDistance = 6;
 
                 }
             }
@@ -70,9 +70,9 @@ public class Ghost_spawner : MonoBehaviour
                 {
 
                     print("updated ghst positioning to medium");
-                    e_g.xMinDistance = 4;
-                    e_g.yMinDistance = 2;
-                    e_g.yMaxDistance = 6;
+                    e_g.xMinDistance = 6;
+                    e_g.yMinDistance = 4;
+                    e_g.yMaxDistance = 8;
                 }
                 
             }

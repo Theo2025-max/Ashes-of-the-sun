@@ -282,6 +282,7 @@ MonoBehaviour:
   fallSpeed: 2
   fadeDuration: 1
   motherFlamePrefab: {fileID: 5276999200236645472, guid: 463c5a9b4e4f8744f9d1764cb1a4f5b7, type: 3}
+  enemy: {fileID: 5686615857000269312}
 --- !u!114 &6628432355313359807
 MonoBehaviour:
   m_ObjectHideFlags: 0

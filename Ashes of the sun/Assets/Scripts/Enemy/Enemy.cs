@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     // MOVEMENT
     [Header("Movement")]
-    [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] public float moveSpeed = 2f;
     protected bool canMove = true;
     protected bool facingRight = true;
     protected int facingDir = 1;

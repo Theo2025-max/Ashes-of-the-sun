@@ -8,9 +8,9 @@ public class Enemy_Ghost : Enemy
     [SerializeField] private float activeDuration = 3f;
     private float activeTimer;
 
-    [SerializeField] public float xMinDistance = 6f;
-    [SerializeField] public float yMinDistance = 4f;
-    [SerializeField] public float yMaxDistance = 8f;
+    [SerializeField] public float xMinDistance = 8f;
+    [SerializeField] public float yMinDistance = 6f;
+    [SerializeField] public float yMaxDistance = 10f;
 
     private bool isChasing;
     private Transform target;
@@ -39,6 +39,7 @@ public class Enemy_Ghost : Enemy
     private bool can_damage = true;
     private float damage_time = 0;
     bool targeting_player;
+    public Enemy enemy;
 
 
     private void Start()
@@ -51,6 +52,10 @@ public class Enemy_Ghost : Enemy
         else
         {
             targeting_player = false;
+            xMinDistance = 15f;
+            yMinDistance = 1f;
+            yMaxDistance = 2f;
+            enemy.moveSpeed = 1;
         }
     }
     protected override void Update()
@@ -156,9 +161,13 @@ public class Enemy_Ghost : Enemy
 
     private void EndChase()
     {
-        idleTimer = idleDuration;
-        isChasing = false;
-        anim.SetTrigger("disappear");
+        if (targeting_player)
+        {
+            idleTimer = idleDuration;
+            isChasing = false;
+            anim.SetTrigger("disappear");
+        }
+        
     }
     #endregion
 
