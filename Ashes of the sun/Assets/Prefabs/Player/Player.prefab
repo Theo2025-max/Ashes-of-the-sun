@@ -193,6 +193,7 @@ MonoBehaviour:
   flameProjectile: {fileID: 2994110495026577415, guid: a17d25a2dab9464488d96fab0afa1e9a, type: 3}
   flamePosition: {fileID: 1845089991452567788}
   deathVFX: {fileID: 4912445840681284122, guid: 50152c2b21c72b24fbf24a42d45c0db5, type: 3}
+  shoot_shake: {fileID: 0}
 --- !u!114 &8496099049635746953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,15 +209,6 @@ MonoBehaviour:
   startingHealth: 7
   deathVFX: {fileID: 1552639893246350396, guid: d6641ac3cabb2cb4f9d5c281815954d9, type: 3}
   motherFlames:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &9204059034624126542
 GameObject:
