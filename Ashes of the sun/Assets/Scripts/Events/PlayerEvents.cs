@@ -1,12 +1,20 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public static class PlayerEvents
 {
     public static event Action<Transform> OnPlayerSpawned;
 
-    public static void PlayerSpawned(Transform playerTransform)
+    private static Transform currentPlayer;
+
+    public static void PlayerSpawned(Transform player)
     {
-        OnPlayerSpawned?.Invoke(playerTransform);
+        currentPlayer = player;
+        OnPlayerSpawned?.Invoke(player);
+    }
+
+    public static Transform GetCurrentPlayer()
+    {
+        return currentPlayer;
     }
 }
