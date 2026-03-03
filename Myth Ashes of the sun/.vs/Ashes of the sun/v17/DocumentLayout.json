@@ -1,0 +1,294 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|c:\\users\\thend\\documents\\projects\\dev lab\\ashes of the sun\\ashes-of-the-sun\\ashes of the sun\\assets\\scripts\\enemy\\ghost_spawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\ghost_spawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\enemy\\enemy_ghost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemy_ghost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\pandora\u0027s box\\pandora\u0027s box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\pandora\u0027s box\\pandora\u0027s box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\enemy\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\traps\\sawtrap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\traps\\sawtrap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\game manager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game manager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\weapons\\flameresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapons\\flameresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\player\\deadzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\deadzone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\player\\damagetrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\damagetrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\firstgeargames\\smoothcamerashaker\\scripts\\shakers\\camerashaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\firstgeargames\\smoothcamerashaker\\scripts\\shakers\\camerashaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\events\\playerevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\events\\playerevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\collections\\motherflame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\collections\\motherflame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\checkpoints\\startpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkpoints\\startpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\scripts\\checkpoints\\checkpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkpoints\\checkpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\assets\\firstgeargames\\smoothcamerashaker\\scripts\\shakerinstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD03C065-AFE4-41E1-6899-1EB9A1E78A09}|Assembly-CSharp.csproj|solutionrelative:assets\\firstgeargames\\smoothcamerashaker\\scripts\\shakerinstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MotherFlame.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Collections\\MotherFlame.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Collections\\MotherFlame.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Collections\\MotherFlame.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Collections\\MotherFlame.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T17:43:43.577Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enemy_Ghost.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Enemy_Ghost.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\Enemy_Ghost.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Enemy_Ghost.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\Enemy_Ghost.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T09:29:44.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pandora\u0027s box.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Pandora\u0027s box\\Pandora\u0027s box.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Pandora\u0027s box\\Pandora\u0027s box.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Pandora\u0027s box\\Pandora\u0027s box.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Pandora\u0027s box\\Pandora\u0027s box.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAB4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T12:21:20.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FlameResource.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Weapons\\FlameResource.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapons\\FlameResource.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Weapons\\FlameResource.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapons\\FlameResource.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T08:36:46.397Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DeadZone.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\DeadZone.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\DeadZone.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\DeadZone.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\DeadZone.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T08:34:36.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAswKAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T05:40:43.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Ghost_spawner.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Ghost_spawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\Ghost_spawner.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Ghost_spawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\Ghost_spawner.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwDYAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T09:07:11.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Enemy.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\Enemy.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Enemy\\Enemy.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\Enemy.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T10:06:16.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SawTrap.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Traps\\SawTrap.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Traps\\SawTrap.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Traps\\SawTrap.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Traps\\SawTrap.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAowIEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T05:06:37.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerHealth.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerHealth.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAswEUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T17:14:58.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Game Manager\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game Manager\\GameManager.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Game Manager\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game Manager\\GameManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T17:06:54.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CameraShaker.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\Shakers\\CameraShaker.cs",
+              "RelativeDocumentMoniker": "Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\Shakers\\CameraShaker.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\Shakers\\CameraShaker.cs",
+              "RelativeToolTip": "Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\Shakers\\CameraShaker.cs",
+              "ViewState": "AgIAAL0BAAAAAAAAAAAuwOgBAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T08:03:01.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PlayerEvents.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Events\\PlayerEvents.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Events\\PlayerEvents.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Events\\PlayerEvents.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Events\\PlayerEvents.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T03:14:44.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DamageTrigger.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\DamageTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\DamageTrigger.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Player\\DamageTrigger.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\DamageTrigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T05:44:44.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "StartPoint.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Checkpoints\\StartPoint.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkpoints\\StartPoint.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Checkpoints\\StartPoint.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkpoints\\StartPoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T04:20:28.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ShakerInstance.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\ShakerInstance.cs",
+              "RelativeDocumentMoniker": "Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\ShakerInstance.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\ShakerInstance.cs",
+              "RelativeToolTip": "Assets\\FirstGearGames\\SmoothCameraShaker\\Scripts\\ShakerInstance.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T17:13:41.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Checkpoint.cs",
+              "DocumentMoniker": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Checkpoints\\Checkpoint.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkpoints\\Checkpoint.cs",
+              "ToolTip": "C:\\Users\\thend\\Documents\\Projects\\Dev Lab\\Ashes of the sun\\Ashes-of-the-sun\\Ashes of the sun\\Assets\\Scripts\\Checkpoints\\Checkpoint.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkpoints\\Checkpoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T16:05:29.806Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
