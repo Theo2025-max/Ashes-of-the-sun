@@ -1,63 +1,50 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy_Ghost : Enemy
 {
-    #region Ghost Behavior
     [Header("Ghost Behavior")]
     [SerializeField] private float activeDuration = 3f;
     private float activeTimer;
 
-    [SerializeField] public float xMinDistance = 8f;
-    [SerializeField] public float yMinDistance = 6f;
-    [SerializeField] public float yMaxDistance = 10f;
+    public float xMinDistance = 8f;
+    public float yMinDistance = 6f;
+    public float yMaxDistance = 10f;
 
     private bool isChasing;
     private Transform target;
-    #endregion
 
-    #region Idle Timing
     [Header("Idle Timing")]
     [SerializeField] private float idleDuration = 1.5f;
     private float idleTimer;
-    #endregion
 
-    #region Ghost Death
     [Header("Ghost Death")]
     [SerializeField] private float fallSpeed = 2f;
     [SerializeField] private float fadeDuration = 1f;
-    #endregion
 
-    #region Drops
     [Header("Drops")]
     [SerializeField] private GameObject motherFlamePrefab;
-    #endregion
 
-    #region Unity Callbacks
-
-    //ROYS STUFF
     private bool can_damage = true;
-    private float damage_time = 0;
-    bool targeting_player;
-    public Enemy enemy;
+    private float damage_time;
+    private bool targeting_player;
 
+    public Enemy enemy;
 
     private void Start()
     {
-        int target_int = Random.Range(0, 2);
-        if (target_int == 0) 
-        {
-            targeting_player = true;
-        }
-        else
-        {
-            targeting_player = false;
-            xMinDistance = 15f;
-            yMinDistance = 1f;
-            yMaxDistance = 2f;
-            enemy.moveSpeed = 1;
-        }
+        targeting_player = Random.Range(0, 2) == 0;
+
+        if (targeting_player) return;
+
+        xMinDistance = 15f;
+        yMinDistance = 1f;
+        yMaxDistance = 2f;
+
+        if (enemy != null) enemy.moveSpeed = 1f;
+        else moveSpeed = 1f;
     }
+
     protected override void Update()
     {
         base.Update();
@@ -67,111 +54,112 @@ public class Enemy_Ghost : Enemy
         activeTimer -= Time.deltaTime;
         idleTimer -= Time.deltaTime;
 
-        if (idleTimer <= 0f && !isChasing)
-            StartChase();
-        else if (isChasing && activeTimer <= 0f)
-            EndChase();
+        if (targeting_player && target != null && !target.gameObject.activeInHierarchy)
+        {
+            target = null;
+            isChasing = false;
+            idleTimer = 0f;
+        }
 
-        if(Vector2.Distance(target.position, transform.position) < 1.5f )
+        if (!isChasing && idleTimer <= 0f) StartChase();
+        else if (isChasing && activeTimer <= 0f) EndChase();
+
+        if (target != null && Vector2.Distance(target.position, transform.position) < 1.5f)
         {
             if (targeting_player)
             {
-                PlayerController playerController = target.GetComponent<PlayerController>();
-                PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
-                if (playerController != null)
+                if (target.TryGetComponent(out PlayerController playerController)) playerController.knockback(transform.position.x);
+
+                if (can_damage && target.TryGetComponent(out PlayerHealth playerHealth))
                 {
-                    playerController.knockback(transform.position.x);
-                }
-                if (playerHealth != null && can_damage)
-                {
-                    //playerHealth.TakeDamage(1);
+                    // Player health damage is intentionally disabled in the existing design.
                     can_damage = false;
-                    // objectsBeingDamaged.Add(collision.gameObject);
                 }
             }
             else
             {
-                Pandorasbox pandorasbox = target.GetComponent<Pandorasbox>();
-                if (pandorasbox != null) 
+                if (target.TryGetComponent(out Pandorasbox pandorasbox))
                 {
                     pandorasbox.take_damage(10);
                     Destroy(gameObject);
+                    return;
                 }
             }
-
         }
 
-        if (can_damage == false) 
+        if (!can_damage)
         {
             damage_time += Time.deltaTime;
-            if(damage_time > 1)
+
+            if (damage_time > 1f)
             {
                 can_damage = true;
-                damage_time = 0;
+                damage_time = 0f;
             }
         }
 
         HandleMovement();
     }
-    #endregion
 
-    #region Movement
     private void HandleMovement()
     {
-        if (target == null || !isChasing || !canMove) return;
+        if (!isChasing || !canMove || target == null) return;
 
         HandleFlip(target.position.x);
+
         transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
-    #endregion
 
-    #region Chase Logic
     private void StartChase()
     {
         if (targeting_player)
         {
-            var players = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
-            if (players.Length == 0) return;
+            PlayerController[] players = FindObjectsByType<PlayerController>();
+
+            if (players.Length == 0)
+            {
+                idleTimer = idleDuration;
+                return;
+            }
 
             target = players[Random.Range(0, players.Length)].transform;
-
-            float xOffset = Random.value < 0.5f ? -1 : 1;
-            float yOffset = Random.Range(yMinDistance, yMaxDistance);
-
-            transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
-
-            activeTimer = activeDuration;
-            isChasing = true;
-            anim.SetTrigger("appear");
         }
         else
         {
-            target = GameObject.FindGameObjectWithTag("PANDORAS BOX").transform;
-            float xOffset = Random.value < 0.5f ? -1 : 1;
-            float yOffset = Random.Range(yMinDistance, yMaxDistance);
+            GameObject pandorasBox = GameObject.FindGameObjectWithTag("PANDORAS BOX");
 
-            transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
+            if (pandorasBox == null)
+            {
+                Debug.LogError("[Enemy_Ghost] No active GameObject with tag 'PANDORAS BOX' was found.", this);
+                idleTimer = idleDuration;
+                return;
+            }
 
-            activeTimer = activeDuration;
-            isChasing = true;
-            anim.SetTrigger("appear");
+            target = pandorasBox.transform;
         }
-        
+
+        float xOffset = Random.value < .5f ? -1f : 1f;
+        float yOffset = Random.Range(yMinDistance, yMaxDistance);
+
+        transform.position = target.position + new Vector3(xMinDistance * xOffset, yOffset, 0f);
+
+        activeTimer = activeDuration;
+        isChasing = true;
+
+        if (anim != null) anim.SetTrigger("appear");
     }
 
     private void EndChase()
     {
-        if (targeting_player)
-        {
-            idleTimer = idleDuration;
-            isChasing = false;
-            anim.SetTrigger("disappear");
-        }
-        
-    }
-    #endregion
+        if (!targeting_player) return;
 
-    #region Death
+        idleTimer = idleDuration;
+        isChasing = false;
+        target = null;
+
+        if (anim != null) anim.SetTrigger("disappear");
+    }
+
     public override void Die()
     {
         if (isDead) return;
@@ -180,33 +168,36 @@ public class Enemy_Ghost : Enemy
         canMove = false;
 
         EnableColliders(false);
-        anim.SetTrigger("disappear");
 
-        // Spawn Mother Flame immediately at death position
+        if (anim != null) anim.SetTrigger("disappear");
+
         SpawnMotherFlame();
-
         StartCoroutine(GhostFallDeath());
     }
 
     private void SpawnMotherFlame()
     {
-        if (motherFlamePrefab == null)
-            return;
-
-        Instantiate(motherFlamePrefab, transform.position, Quaternion.identity);
+        if (motherFlamePrefab != null) Instantiate(motherFlamePrefab, transform.position, Quaternion.identity);
     }
 
     private IEnumerator GhostFallDeath()
     {
+        if (sr == null)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+
         float elapsed = 0f;
         Color startColor = sr.color;
+        float safeFadeDuration = Mathf.Max(.01f, fadeDuration);
 
-        while (elapsed < fadeDuration)
+        while (elapsed < safeFadeDuration)
         {
             elapsed += Time.deltaTime;
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / safeFadeDuration);
             sr.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
 
             yield return null;
@@ -220,10 +211,14 @@ public class Enemy_Ghost : Enemy
 
         Destroy(gameObject);
     }
-    #endregion
 
-    #region Visibility Helpers
-    public void MakeInvisible() => sr.color = Color.clear;
-    public void MakeVisible() => sr.color = Color.white;
-    #endregion
+    public void MakeInvisible()
+    {
+        if (sr != null) sr.color = Color.clear;
+    }
+
+    public void MakeVisible()
+    {
+        if (sr != null) sr.color = Color.white;
+    }
 }

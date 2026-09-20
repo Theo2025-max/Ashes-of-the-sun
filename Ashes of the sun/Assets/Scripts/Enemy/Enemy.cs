@@ -2,42 +2,38 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // COMPONENTS
     protected SpriteRenderer sr;
     protected Animator anim;
     protected Rigidbody2D rb;
     protected Collider2D[] colliders;
 
-    // MOVEMENT
     [Header("Movement")]
     [SerializeField] public float moveSpeed = 2f;
     protected bool canMove = true;
     protected bool facingRight = true;
     protected int facingDir = 1;
 
-    // COLLISION
     [Header("Collision")]
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected float groundCheckDistance = 1f;
-    [SerializeField] protected float wallCheckDistance = 0.7f;
+    [SerializeField] protected float wallCheckDistance = .7f;
     [SerializeField] protected Transform groundCheck;
+
     protected bool isGrounded;
     protected bool isWallDetected;
 
-    // HEALTH
     [Header("Health")]
     [SerializeField] protected int maxHealth = 20;
     protected int currentHealth = 2;
 
-    // DAMAGE (we keep this in case we add it back later)
     [Header("Damage")]
     [SerializeField] private int damageAmount = 1;
     public int DamageAmount => damageAmount;
 
-    // DEATH
     [Header("Death")]
     [SerializeField] protected float deathImpactSpeed = 5f;
     [SerializeField] protected float deathRotationSpeed = 150f;
+
     protected bool isDead;
     protected int deathRotationDirection = 1;
 
@@ -49,12 +45,19 @@ public class Enemy : MonoBehaviour
         colliders = GetComponentsInChildren<Collider2D>();
 
         currentHealth = maxHealth;
+
+        if (sr == null) Debug.LogError("[Enemy] SpriteRenderer component is missing.", this);
+        if (anim == null) Debug.LogError("[Enemy] Animator component is missing.", this);
+        if (rb == null) Debug.LogError("[Enemy] Rigidbody2D component is missing.", this);
     }
 
     protected virtual void Update()
     {
         if (isDead)
+        {
             HandleDeathRotation();
+            return;
+        }
 
         HandleCollision();
         HandleAnimator();
@@ -64,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void HandleCollision()
     {
-        if (groundCheck)
+        if (groundCheck != null)
             isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
         isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
@@ -72,9 +75,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void HandleFlip(float targetX)
     {
-        float myX = transform.position.x;
-        if ((targetX < myX) ^ facingRight)
+        if (targetX < transform.position.x && facingRight ||
+            targetX > transform.position.x && !facingRight)
+        {
             Flip();
+        }
     }
 
     protected virtual void Flip()
@@ -84,39 +89,46 @@ public class Enemy : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    // DAMAGE & HEALTH (still needed for enemy's own damage system)
     public virtual void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isDead || damage <= 0) return;
 
         currentHealth -= damage;
-        if (anim) anim.SetTrigger("hit");
 
-        if (currentHealth <= 0)
-            Die();
+        if (anim != null) anim.SetTrigger("hit");
+        if (currentHealth <= 0) Die();
     }
 
-    // DEATH LOGIC
     public virtual void Die()
     {
         if (isDead) return;
 
-        if (rb.bodyType == RigidbodyType2D.Kinematic)
-            rb.bodyType = RigidbodyType2D.Dynamic;
+        isDead = true;
+        canMove = false;
 
         EnableColliders(false);
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, deathImpactSpeed);
 
-        deathRotationDirection = Random.value < 0.5f ? -1 : 1;
-        isDead = true;
+        if (rb != null)
+        {
+            if (rb.bodyType == RigidbodyType2D.Kinematic)
+                rb.bodyType = RigidbodyType2D.Dynamic;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, deathImpactSpeed);
+        }
+
+        deathRotationDirection = Random.value < .5f ? -1 : 1;
 
         Destroy(gameObject, 10f);
     }
 
     protected void EnableColliders(bool enable)
     {
-        foreach (var c in colliders)
-            c.enabled = enable;
+        if (colliders == null) return;
+
+        foreach (Collider2D enemyCollider in colliders)
+        {
+            if (enemyCollider != null) enemyCollider.enabled = enable;
+        }
     }
 
     private void HandleDeathRotation()
@@ -126,11 +138,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        if (groundCheck)
+        if (groundCheck != null)
             Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckDistance);
 
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * facingDir * wallCheckDistance);
+        Gizmos.DrawLine(transform.position,transform.position + Vector3.right * facingDir * wallCheckDistance);
     }
-
-
 }

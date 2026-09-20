@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using FirstGearGames.SmoothCameraShaker;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,15 +10,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private CapsuleCollider2D cd;
-
     private Vector2 moveInput;
 
     #endregion
 
     #region Movement Settings
 
-    private bool canBeControlled = false;
-    
+    private bool canBeControlled;
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
@@ -48,14 +46,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 wallJumpForce;
 
     private bool isWallJumping;
+    private Coroutine wallJumpRoutine;
 
     [Header("knockback")]
     [SerializeField] private float knockbackDuration = 1f;
     [SerializeField] private Vector2 knockbackPower;
+
     private bool isKnocked;
-    private bool canBeKnocked =true;
-
-
+    private bool canBeKnocked = true;
+    private Coroutine knockbackCoroutine;
 
     #endregion
 
@@ -90,11 +89,8 @@ public class PlayerController : MonoBehaviour
     [Header("VFX")]
     public GameObject deathVFX;
 
-    //CAMERA SHAKE AREA
     public ShakeData shoot_shake;
     public ShakeData damage_shake;
-
-    
 
     #endregion
 
@@ -105,18 +101,37 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CapsuleCollider2D>();
         anim = GetComponentInChildren<Animator>();
+
+        if (rb == null) Debug.LogError("[PlayerController] Rigidbody2D component is missing.", this);
+        if (cd == null) Debug.LogError("[PlayerController] CapsuleCollider2D component is missing.", this);
+        if (anim == null) Debug.LogError("[PlayerController] Animator component is missing from the Player hierarchy.", this);
+        if (flameProjectile == null) Debug.LogError("[PlayerController] Flame Projectile reference is missing.", this);
+        if (flamePosition == null) Debug.LogError("[PlayerController] Flame Position reference is missing.", this);
     }
 
     private void Start()
     {
-        defaultGravityScale =rb.gravityScale;
+        if (rb == null || cd == null) return;
+
+        defaultGravityScale = rb.gravityScale;
         RespawnFinished(false);
     }
 
     private void Update()
     {
-        // Handle input
+        if (rb == null || cd == null || anim == null) return;
+
         moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+
+        UpdateAirborneStatus();
+
+        if (!canBeControlled || isKnocked)
+        {
+            HandleCollision();
+            HandleAnimations();
+            return;
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -124,14 +139,9 @@ public class PlayerController : MonoBehaviour
             RequestBufferJump();
         }
 
-      
-        // Movement & physics
-        UpdateAirborneStatus();
-
-        if(canBeControlled == false) return;
-        if(isKnocked) return;
-
         ShootFlame();
+        if (!canBeControlled || !gameObject.activeInHierarchy) return;
+
         HandleWallSlide();
         HandleMovement();
         HandleFlip();
@@ -141,48 +151,57 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnFinished(bool finished)
     {
-        float gravityScale = defaultGravityScale;
-        
-        if (finished)
+        if (rb == null || cd == null) return;
+
+        if (!finished)
         {
-            rb.gravityScale = gravityScale;
-            canBeControlled = true;
-            cd.enabled = true;
+            ResetTransientMovementState();
+            rb.linearVelocity = Vector2.zero;
         }
-        else
-        {
-            rb.gravityScale = 0;
-            canBeControlled = false;
-            cd.enabled = false;
-        }
+
+        rb.gravityScale = finished ? defaultGravityScale : 0f;
+        canBeControlled = finished;
+        cd.enabled = finished;
     }
+
     public void knockback(float sourceDamageXPosition)
     {
-        CameraShakerHandler.Shake(damage_shake);
-        float knockbackDir = 1;
-        if (transform.position.x < sourceDamageXPosition)
-            knockbackDir = -1;
+        if (!canBeKnocked || rb == null || anim == null) return;
 
-        if (!canBeKnocked) return;
+        canBeKnocked = false;
+        isKnocked = true;
 
-        StartCoroutine(knockbackRoutine());
+        if (damage_shake != null) CameraShakerHandler.Shake(damage_shake);
+
+        float knockbackDir = transform.position.x < sourceDamageXPosition ? -1f : 1f;
+
+        if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
+
+        knockbackCoroutine = StartCoroutine(knockbackRoutine());
+
         anim.SetTrigger("knockback");
         rb.linearVelocity = new Vector2(knockbackPower.x * knockbackDir, knockbackPower.y);
     }
 
     public void force_reset_knockback()
     {
+        if (knockbackCoroutine != null)
+        {
+            StopCoroutine(knockbackCoroutine);
+            knockbackCoroutine = null;
+        }
+
         canBeKnocked = true;
         isKnocked = false;
     }
+
     #endregion
 
     #region Movement Logic
 
     private void HandleMovement()
     {
-        if (isWallDetected || isWallJumping)
-            return;
+        if (isWallDetected || isWallJumping) return;
 
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
     }
@@ -191,31 +210,23 @@ public class PlayerController : MonoBehaviour
     {
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
 
-        if (isGrounded || coyoteJumpAvailable)
-        {
-            Jump();
-        }
-        else if (isWallDetected && !isGrounded)
-        {
-            WallJump();
-            Jump();
-        }
-        else if (canDoubleJump)
-        {
-            DoubleJump();
-        }
+        if (isGrounded || coyoteJumpAvailable) Jump();
+        else if (isWallDetected && !isGrounded) WallJump();
+        else if (canDoubleJump) DoubleJump();
 
         CancelCoyoteJump();
     }
 
-    private void Jump()
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-    }
+    private void Jump() => rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
     private void DoubleJump()
     {
-        StopCoroutine(WallJumpRoutine());
+        if (wallJumpRoutine != null)
+        {
+            StopCoroutine(wallJumpRoutine);
+            wallJumpRoutine = null;
+        }
+
         isWallJumping = false;
         canDoubleJump = false;
 
@@ -230,15 +241,19 @@ public class PlayerController : MonoBehaviour
 
         Flip();
 
-        StopAllCoroutines();
-        StartCoroutine(WallJumpRoutine());
+        if (wallJumpRoutine != null) StopCoroutine(wallJumpRoutine);
+
+        wallJumpRoutine = StartCoroutine(WallJumpRoutine());
     }
 
     private IEnumerator WallJumpRoutine()
     {
         isWallJumping = true;
-        yield return new WaitForSeconds(wallJumpDuration);
+
+        yield return new WaitForSeconds(Mathf.Max(0f, wallJumpDuration));
+
         isWallJumping = false;
+        wallJumpRoutine = null;
     }
 
     private void HandleWallSlide()
@@ -246,8 +261,7 @@ public class PlayerController : MonoBehaviour
         bool canWallSlide = isWallDetected && rb.linearVelocity.y < 0;
         float yModifier = moveInput.y < 0 ? 1f : .05f;
 
-        if (!canWallSlide)
-            return;
+        if (!canWallSlide) return;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
     }
@@ -258,19 +272,15 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAirborneStatus()
     {
-        if (isGrounded && isAirborne)
-            HandleLanding();
-
-        if (!isGrounded && !isAirborne)
-            BecomeAirborne();
+        if (isGrounded && isAirborne) HandleLanding();
+        if (!isGrounded && !isAirborne) BecomeAirborne();
     }
 
     private void BecomeAirborne()
     {
         isAirborne = true;
 
-        if (rb.linearVelocity.y < 0)
-            ActivateCoyoteJump();
+        if (rb.linearVelocity.y < 0) ActivateCoyoteJump();
     }
 
     private void HandleLanding()
@@ -287,17 +297,15 @@ public class PlayerController : MonoBehaviour
 
     private void RequestBufferJump()
     {
-        if (isAirborne)
-            bufferJumpActivated = Time.time;
+        if (isAirborne) bufferJumpActivated = Time.time;
     }
 
     private void AttemptBufferJump()
     {
-        if (Time.time < bufferJumpActivated + bufferJumpWindow)
-        {
-            bufferJumpActivated = Time.time - 1;
-            Jump();
-        }
+        if (Time.time >= bufferJumpActivated + bufferJumpWindow) return;
+
+        bufferJumpActivated = Time.time - 1;
+        Jump();
     }
 
     private void ActivateCoyoteJump() => coyoteJumpActivated = Time.time;
@@ -307,25 +315,20 @@ public class PlayerController : MonoBehaviour
 
     #region Collision & Animation
 
-
     private IEnumerator knockbackRoutine()
     {
-        canBeKnocked = false;
-        isKnocked = true;
-
-        yield return new WaitForSeconds(knockbackDuration);
+        yield return new WaitForSeconds(Mathf.Max(0f, knockbackDuration));
 
         canBeKnocked = true;
         isKnocked = false;
+        knockbackCoroutine = null;
     }
 
     public void Die()
     {
-        GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
-        //Destroy(gameObject);
-
+        if (deathVFX != null) Instantiate(deathVFX, transform.position, Quaternion.identity);
+        else Debug.LogWarning("[PlayerController] Death VFX reference is missing.", this);
     }
-
 
     private void HandleCollision()
     {
@@ -335,13 +338,23 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        if (anim == null)
-            return;
-
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isWallDetected", isWallDetected);
+    }
+
+    private void ResetTransientMovementState()
+    {
+        if (wallJumpRoutine != null)
+        {
+            StopCoroutine(wallJumpRoutine);
+            wallJumpRoutine = null;
+        }
+
+        force_reset_knockback();
+
+        isWallJumping = false;
     }
 
     #endregion
@@ -350,14 +363,15 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFlip()
     {
-        if (moveInput.x < 0 && facingRight || moveInput.x > 0 && !facingRight)
-            Flip();
+        if (moveInput.x < 0 && facingRight || moveInput.x > 0 && !facingRight) Flip();
     }
 
     private void Flip()
     {
         facingDir *= -1;
+
         transform.Rotate(0, 180, 0);
+
         facingRight = !facingRight;
     }
 
@@ -367,19 +381,26 @@ public class PlayerController : MonoBehaviour
 
     private void ShootFlame()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        if (flameProjectile == null || flamePosition == null)
         {
-            GameObject flame = Instantiate(flameProjectile, flamePosition.position, Quaternion.identity);
-            CameraShakerHandler.Shake(shoot_shake);
-
-            float direction = facingRight ? 1f : -1f;
-
-            FlameResource flameResource = flame.GetComponent<FlameResource>();
-            if (flameResource != null)
-                flameResource.SetDirection(direction);
-
-            OnFlameShot?.Invoke();
+            Debug.LogError("[PlayerController] Cannot shoot because Flame Projectile or Flame Position is missing.", this);
+            return;
         }
+
+        GameObject flame = Instantiate(flameProjectile, flamePosition.position, Quaternion.identity);
+
+        if (shoot_shake != null) CameraShakerHandler.Shake(shoot_shake);
+
+        float direction = facingRight ? 1f : -1f;
+
+        FlameResource flameResource = flame.GetComponent<FlameResource>();
+
+        if (flameResource != null) flameResource.SetDirection(direction);
+        else Debug.LogWarning("[PlayerController] Spawned flame does not contain a FlameResource component.", flame);
+
+        OnFlameShot?.Invoke();
     }
 
     #endregion
@@ -388,11 +409,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green; 
+        Gizmos.color = Color.green;
 
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckDistance));
+        Gizmos.DrawLine(transform.position,new Vector2(transform.position.x, transform.position.y - groundCheckDistance));
 
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y));
+        Gizmos.DrawLine(transform.position,new Vector2(transform.position.x + wallCheckDistance * facingDir, transform.position.y));
     }
 
     #endregion

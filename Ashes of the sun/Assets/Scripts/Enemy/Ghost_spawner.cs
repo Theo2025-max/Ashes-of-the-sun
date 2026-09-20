@@ -1,82 +1,118 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
 using UnityEngine;
 
 public class Ghost_spawner : MonoBehaviour
 {
     public GameObject Ghost_enemy;
-    float time_passed = 0;
+
+    private float time_passed;
+
     public Transform[] spawn_positions;
-    private float wait_time = 10;
+
+    private float wait_time = 10f;
+
     public Transform Player;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private Coroutine spawnRoutine;
+
+    private void Start()
     {
+        if (!HasRequiredReferences()) return;
+
         spawn_ghost();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         time_passed += Time.deltaTime;
-        if (time_passed > 120)
-        {
-            wait_time = 5;
-        }
-        else if(time_passed > 60)
-        {
-            wait_time = 7;
-        }
+
+        if (time_passed > 120f) wait_time = 5f;
+        else if (time_passed > 60f) wait_time = 7f;
     }
 
-    IEnumerator wait_spawn_ghost()
+    private IEnumerator wait_spawn_ghost()
     {
-        yield return new WaitForSeconds(wait_time);
+        yield return new WaitForSeconds(Mathf.Max(0f, wait_time));
+
+        spawnRoutine = null;
+
         spawn_ghost();
-       // GameObject ghost_duplicate = Instantiate(Ghost_enemy, );
     }
 
     public void spawn_ghost()
     {
+        if (!HasRequiredReferences()) return;
+
         List<Transform> valid_points = new List<Transform>();
-        foreach (Transform t in spawn_positions) 
+
+        foreach (Transform spawnPoint in spawn_positions)
         {
-            if(Vector2.Distance(t.position, Player.position) > 10)
+            if (spawnPoint != null &&
+                Vector2.Distance(spawnPoint.position, Player.position) > 10f)
             {
-                valid_points.Add(t);
+                valid_points.Add(spawnPoint);
             }
         }
-        if(valid_points.Count > 0)
+
+        if (valid_points.Count > 0)
         {
-            Transform selectedpoint = valid_points[Random.Range(0, valid_points.Count)];
-            GameObject ghost_duplicate = Instantiate(Ghost_enemy, selectedpoint.position, Quaternion.identity);
-            Enemy_Ghost e_g = ghost_duplicate.GetComponent<Enemy_Ghost>();
-            if (time_passed > 120)
-            {
-                if(e_g != null)
-                {
-                    print("updated ghst positioning to hard");
-                    e_g.xMinDistance = 4;
-                    e_g.yMinDistance = 2;
-                    e_g.yMaxDistance = 6;
+            Transform selectedpoint =
+                valid_points[Random.Range(0, valid_points.Count)];
 
+            GameObject ghost_duplicate =
+                Instantiate(Ghost_enemy, selectedpoint.position, Quaternion.identity);
+
+            Enemy_Ghost e_g =
+                ghost_duplicate.GetComponent<Enemy_Ghost>();
+
+            if (e_g != null)
+            {
+                if (time_passed > 120f)
+                {
+                    e_g.xMinDistance = 4f;
+                    e_g.yMinDistance = 2f;
+                    e_g.yMaxDistance = 6f;
+                }
+                else if (time_passed > 60f)
+                {
+                    e_g.xMinDistance = 6f;
+                    e_g.yMinDistance = 4f;
+                    e_g.yMaxDistance = 8f;
                 }
             }
-            else if (time_passed > 60)
-            {
-                if(e_g != null)
-                {
-
-                    print("updated ghst positioning to medium");
-                    e_g.xMinDistance = 6;
-                    e_g.yMinDistance = 4;
-                    e_g.yMaxDistance = 8;
-                }
-                
-            }
-            StartCoroutine(wait_spawn_ghost());
         }
+
+        ScheduleNextSpawn();
+    }
+
+    private void ScheduleNextSpawn()
+    {
+        if (!isActiveAndEnabled || spawnRoutine != null) return;
+
+        spawnRoutine = StartCoroutine(wait_spawn_ghost());
+    }
+
+    private bool HasRequiredReferences()
+    {
+        if (Ghost_enemy == null)
+        {
+            Debug.LogError("[Ghost_spawner] Ghost_enemy prefab is missing.", this);
+            return false;
+        }
+
+        if (Player == null)
+        {
+            Debug.LogError("[Ghost_spawner] Player Transform reference is missing.", this);
+            return false;
+        }
+
+        if (spawn_positions == null || spawn_positions.Length == 0)
+        {
+            Debug.LogError("[Ghost_spawner] No spawn positions are configured.", this);
+            return false;
+        }
+
+        return true;
     }
 }

@@ -2,32 +2,20 @@ using UnityEngine;
 
 public class MotherFlame : MonoBehaviour
 {
-    #region VFX
     [SerializeField] private GameObject pickupVfx;
-    #endregion
 
-    #region References
-    private GameManager gameManager;
-    private Animator anim;
-    #endregion
-
-    #region Unity Callbacks
-    private void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
-    }
-
-    private void Start()
-    {
-        gameManager = GameManager.instance;
-    }
+    private bool collected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-        if (playerHealth == null) return;
+        if (collected) return;
 
-        if (!playerHealth.CanHeal()) return;
+        PlayerHealth playerHealth =
+            collision.GetComponentInParent<PlayerHealth>();
+
+        if (playerHealth == null || !playerHealth.CanHeal()) return;
+
+        collected = true;
 
         playerHealth.Heal(1);
 
@@ -36,5 +24,4 @@ public class MotherFlame : MonoBehaviour
 
         Destroy(gameObject);
     }
-    #endregion
 }
