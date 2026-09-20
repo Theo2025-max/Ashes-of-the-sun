@@ -28,7 +28,6 @@ public class Pandorasbox : MonoBehaviour
     private void Update()
     {
         current_health = Mathf.Clamp(current_health, 0f, max_health);
-
         UpdateHealthUI(false);
 
         time_survived += Time.deltaTime;
@@ -58,7 +57,6 @@ public class Pandorasbox : MonoBehaviour
         float targetFill = max_health > 0f ? current_health / max_health : 0f;
 
         if (healthbar_foreground != null) healthbar_foreground.fillAmount = targetFill;
-
         if (healthbar_background == null) return;
 
         if (immediate)
@@ -67,8 +65,6 @@ public class Pandorasbox : MonoBehaviour
             return;
         }
 
-        // Matches the old 0.01-per-frame smoothing at roughly 60 FPS
-        // without making the visual behaviour frame-rate dependent.
         float lerpFactor = 1f - Mathf.Pow(.99f, Time.deltaTime * 60f);
 
         healthbar_background.fillAmount = Mathf.Lerp(healthbar_background.fillAmount, targetFill, lerpFactor);

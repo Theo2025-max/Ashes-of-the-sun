@@ -80,7 +80,7 @@ public class Enemy_Ghost : Enemy
             {
                 if (target.TryGetComponent(out Pandorasbox pandorasbox))
                 {
-                    pandorasbox.take_damage(10);
+                    pandorasbox.TakeDamage(10f);
                     Destroy(gameObject);
                     return;
                 }
